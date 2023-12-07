@@ -1,0 +1,27 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            // Attempt to divide by zero
+            int result = DivideByZero();
+            Console.WriteLine($"Result: {result}");
+        }
+        catch (DivideByZeroException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+
+    static int DivideByZero()
+    {
+        int numerator = 10;
+        int denominator = 0;
+
+        // Attempt to divide by zero
+        return numerator / denominator;
+    }
+}
