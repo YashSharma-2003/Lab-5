@@ -1,0 +1,28 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            // Attempt to access an array element at an out-of-bounds index
+            AccessArrayElement();
+        }
+        catch (IndexOutOfRangeException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+
+    static void AccessArrayElement()
+    {
+        int[] numbers = { 1, 2, 3, 4, 5 };
+
+        // Attempt to access an element at an out-of-bounds index
+        int index = 10;
+        int value = numbers[index];
+
+        Console.WriteLine($"Value at index {index}: {value}");
+    }
+}
