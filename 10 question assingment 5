@@ -1,0 +1,87 @@
+using System;
+
+public class NegativePriceException : Exception
+{
+    public NegativePriceException(string message) : base(message)
+    {
+    }
+}
+
+public class PriceTooHighException : Exception
+{
+    public PriceTooHighException(string message) : base(message)
+    {
+    }
+}
+
+class ShoppingCartProgram
+{
+    static void Main()
+    {
+        const double MaxPrice = 10000;
+        double[] shoppingCart = new double[10]; // Assuming a maximum of 10 items in the cart
+        int cartIndex = 0;
+
+        while (true)
+        {
+            try
+            {
+                Console.WriteLine("Enter the price of the item (or enter '0' to finish): ");
+                string input = Console.ReadLine();
+
+                double price;
+
+                // Check if the user wants to finish
+                if (input.Trim() == "0")
+                {
+                    break;
+                }
+
+                // Parse the user input and handle exceptions
+                if (!double.TryParse(input, out price))
+                {
+                    throw new FormatException("Invalid input. Please enter a valid numeric price.");
+                }
+
+                if (price < 0)
+                {
+                    throw new NegativePriceException("Invalid price. Please enter a non-negative price.");
+                }
+
+                if (price > MaxPrice)
+                {
+                    throw new PriceTooHighException($"Price exceeds maximum allowed value of {MaxPrice}. Please enter a lower price.");
+                }
+
+                // If no exceptions are thrown, add the price to the shopping cart
+                shoppingCart[cartIndex++] = price;
+                Console.WriteLine($"Item added to the cart. Current total items: {cartIndex}");
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            catch (NegativePriceException ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            catch (PriceTooHighException ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An unexpected error occurred: " + ex.Message);
+            }
+        }
+
+        // Display the total price of items in the shopping cart
+        double totalPrice = 0;
+        for (int i = 0; i < cartIndex; i++)
+        {
+            totalPrice += shoppingCart[i];
+        }
+
+        Console.WriteLine($"Total Price of Items in the Cart: {totalPrice}");
+    }
+}
