@@ -1,0 +1,27 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter a number: ");
+        string userInput = Console.ReadLine();
+
+        try
+        {
+            // Attempt to parse the string to an integer
+            int number = int.Parse(userInput);
+            Console.WriteLine("Successfully converted to an integer: " + number);
+        }
+        catch (FormatException ex)
+        {
+            // Handle the FormatException
+            Console.WriteLine("Error: " + ex.Message);
+        }
+        catch (Exception ex)
+        {
+            // Handle other exceptions if needed
+            Console.WriteLine("An error occurred: " + ex.Message);
+        }
+    }
+}
