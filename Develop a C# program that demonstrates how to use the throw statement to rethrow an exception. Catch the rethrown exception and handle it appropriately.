@@ -1,0 +1,33 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            // Simulate an exception
+            ThrowException();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Caught the rethrown exception: " + ex.Message);
+        }
+    }
+
+    static void ThrowException()
+    {
+        try
+        {
+            // Simulate an exception
+            throw new InvalidOperationException("Original exception");
+        }
+        catch (Exception innerException)
+        {
+            Console.WriteLine("Caught the original exception: " + innerException.Message);
+
+            // Rethrow the caught exception using the throw statement
+            throw; // This rethrows the caught exception to the calling method
+        }
+    }
+}
