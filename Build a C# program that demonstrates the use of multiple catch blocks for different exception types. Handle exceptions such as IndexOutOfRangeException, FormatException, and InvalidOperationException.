@@ -1,0 +1,38 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        try
+        {
+            // Simulate IndexOutOfRangeException
+            int[] numbers = { 1, 2, 3 };
+            int value = numbers[5]; // Trying to access an element that doesn't exist
+
+            // Simulate FormatException
+            string userInput = "abc";
+            int number = int.Parse(userInput); // Trying to parse a non-integer string
+
+            // Simulate InvalidOperationException
+            throw new InvalidOperationException("This is an example of InvalidOperationException.");
+        }
+        catch (IndexOutOfRangeException ex)
+        {
+            Console.WriteLine("IndexOutOfRangeException: " + ex.Message);
+        }
+        catch (FormatException ex)
+        {
+            Console.WriteLine("FormatException: " + ex.Message);
+        }
+        catch (InvalidOperationException ex)
+        {
+            Console.WriteLine("InvalidOperationException: " + ex.Message);
+        }
+        catch (Exception ex)
+        {
+            // Catch any other unhandled exceptions
+            Console.WriteLine("An error occurred: " + ex.Message);
+        }
+    }
+}
